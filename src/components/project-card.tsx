@@ -28,6 +28,8 @@ function ProjectImage({ src, alt }: { src: string; alt: string }) {
 interface Props {
   title: string;
   href?: string;
+  /** 記事(開発背景など)へのリンク。指定するとカードはこちらへ遷移する */
+  detailHref?: string;
   description: string;
   dates: string;
   tags: readonly string[];
@@ -45,6 +47,7 @@ interface Props {
 export function ProjectCard({
   title,
   href,
+  detailHref,
   description,
   dates,
   tags,
@@ -54,37 +57,43 @@ export function ProjectCard({
   links,
   className,
 }: Props) {
+  // 記事(detailHref)があればそちらへ、無ければ従来どおり外部サイト(href)へ遷移する
+  const cardHref = detailHref || href;
+  const isExternalCardLink = !detailHref;
+
   return (
     <div
       className={cn(
-        "flex flex-col h-full border border-border rounded-xl overflow-hidden hover:ring-2 cursor-pointer hover:ring-muted transition-all duration-200",
+        "relative flex flex-col h-full border border-border rounded-xl overflow-hidden hover:ring-2 cursor-pointer hover:ring-muted transition-all duration-200",
         className
       )}
     >
-      <div className="relative shrink-0">
+      {cardHref && (
         <Link
-          href={href || "#"}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block"
-        >
-          {video ? (
-            <video
-              src={video}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-48 object-cover"
-            />
-          ) : image ? (
-            <ProjectImage src={image} alt={title} />
-          ) : (
-            <div className="w-full h-48 bg-muted" />
-          )}
-        </Link>
+          href={cardHref}
+          target={isExternalCardLink ? "_blank" : undefined}
+          rel={isExternalCardLink ? "noopener noreferrer" : undefined}
+          className="absolute inset-0 z-[1]"
+          aria-label={detailHref ? `Read more about ${title}` : `Open ${title}`}
+        />
+      )}
+      <div className="relative shrink-0">
+        {video ? (
+          <video
+            src={video}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-48 object-cover"
+          />
+        ) : image ? (
+          <ProjectImage src={image} alt={title} />
+        ) : (
+          <div className="w-full h-48 bg-muted" />
+        )}
         {links && links.length > 0 && (
-          <div className="absolute top-2 right-2 flex flex-wrap gap-2">
+          <div className="absolute top-2 right-2 z-[2] flex flex-wrap gap-2">
             {links.map((link, idx) => (
               <Link
                 href={link.href}
@@ -111,15 +120,19 @@ export function ProjectCard({
             <h3 className="font-semibold">{title}</h3>
             <time className="text-xs text-muted-foreground">{dates}</time>
           </div>
-          <Link
-            href={href || "#"}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
-            aria-label={`Open ${title}`}
-          >
-            <ArrowUpRight className="h-4 w-4" aria-hidden />
-          </Link>
+          {/* 記事へ遷移するようになった場合、ここから元の外部サイトを直接開けるようにする */}
+          {href && (
+            <Link
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="relative z-[2] text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
+              aria-label={`Open ${title} website`}
+            >
+              <ArrowUpRight className="h-4 w-4" aria-hidden />
+            </Link>
+          )}
         </div>
         <div className="text-xs flex-1 prose max-w-full text-pretty font-sans leading-relaxed text-muted-foreground dark:prose-invert">
           <Markdown>{description}</Markdown>

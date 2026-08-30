@@ -1,8 +1,14 @@
 import BlurFade from "@/components/magicui/blur-fade";
 import { ProjectCard } from "@/components/project-card";
 import { DATA } from "@/data/resume";
+import { allProjectPosts } from "content-collections";
 
 const BLUR_FADE_DELAY = 0.04;
+
+// slugに対応する記事(content/projects/<slug>.mdx)が存在するプロジェクトのslug一覧
+const slugsWithArticle = new Set(
+    allProjectPosts.map((post) => post._meta.path.replace(/\.mdx$/, ""))
+);
 
 export default function ProjectsSection() {
     return (
@@ -32,25 +38,34 @@ export default function ProjectsSection() {
                     </div>
                 </div>
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto auto-rows-fr">
-                    {DATA.projects.map((project, id) => (
-                        <BlurFade
-                            key={project.title}
-                            delay={BLUR_FADE_DELAY * 12 + id * 0.05}
-                            className="h-full"
-                        >
-                            <ProjectCard
-                                href={project.href}
+                    {DATA.projects.map((project, id) => {
+                        const slug = "slug" in project ? project.slug : undefined;
+                        const detailHref =
+                            slug && slugsWithArticle.has(slug)
+                                ? `/projects/${slug}`
+                                : undefined;
+
+                        return (
+                            <BlurFade
                                 key={project.title}
-                                title={project.title}
-                                description={project.description}
-                                dates={project.dates}
-                                tags={project.technologies}
-                                image={project.image}
-                                video={project.video}
-                                links={project.links}
-                            />
-                        </BlurFade>
-                    ))}
+                                delay={BLUR_FADE_DELAY * 12 + id * 0.05}
+                                className="h-full"
+                            >
+                                <ProjectCard
+                                    href={project.href}
+                                    detailHref={detailHref}
+                                    key={project.title}
+                                    title={project.title}
+                                    description={project.description}
+                                    dates={project.dates}
+                                    tags={project.technologies}
+                                    image={project.image}
+                                    video={project.video}
+                                    links={project.links}
+                                />
+                            </BlurFade>
+                        );
+                    })}
                 </div>
             </div>
         </section>
