@@ -24,17 +24,16 @@ export default function ContactSection() {
           Get in Touch
         </h2>
         <p className="mx-auto max-w-lg text-muted-foreground text-balance">
-          Want to chat? Just shoot me a dm{" "}
+          Want to chat? Feel free to reach out{" "}
           <Link
-            href={DATA.contact.social.X.url}
+            href={DATA.contact.social.LinkedIn.url}
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-500 hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
           >
-            with a direct question on twitter
+            on LinkedIn
           </Link>{" "}
-          and I&apos;ll respond whenever I can. I will ignore all
-          soliciting.
+          and I&apos;ll get back to you as soon as I can.
         </p>
       </div>
     </div>
