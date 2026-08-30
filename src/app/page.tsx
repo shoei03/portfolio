@@ -15,7 +15,7 @@ const BLUR_FADE_DELAY = 0.04;
 
 export default function Page() {
   return (
-    <main className="min-h-dvh flex flex-col gap-14 relative">
+    <main className="min-h-dvh flex flex-col gap-14 relative max-w-2xl mx-auto w-full">
       <section id="hero">
         <div className="mx-auto w-full max-w-2xl space-y-8">
           <div className="gap-2 gap-y-6 flex flex-col md:flex-row justify-between">
@@ -55,16 +55,18 @@ export default function Page() {
           </BlurFade>
         </div>
       </section>
-      <section id="work">
-        <div className="flex min-h-0 flex-col gap-y-6">
-          <BlurFade delay={BLUR_FADE_DELAY * 5}>
-            <h2 className="text-xl font-bold">Work Experience</h2>
-          </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 6}>
-            <WorkSection />
-          </BlurFade>
-        </div>
-      </section>
+      {DATA.work.length > 0 && (
+        <section id="work">
+          <div className="flex min-h-0 flex-col gap-y-6">
+            <BlurFade delay={BLUR_FADE_DELAY * 5}>
+              <h2 className="text-xl font-bold">Work Experience</h2>
+            </BlurFade>
+            <BlurFade delay={BLUR_FADE_DELAY * 6}>
+              <WorkSection />
+            </BlurFade>
+          </div>
+        </section>
+      )}
       <section id="education">
         <div className="flex min-h-0 flex-col gap-y-6">
           <BlurFade delay={BLUR_FADE_DELAY * 7}>
@@ -73,7 +75,7 @@ export default function Page() {
           <div className="flex flex-col gap-8">
             {DATA.education.map((education, index) => (
               <BlurFade
-                key={education.school}
+                key={`${education.school}-${education.degree}`}
                 delay={BLUR_FADE_DELAY * 8 + index * 0.05}
               >
                 <Link
@@ -135,11 +137,13 @@ export default function Page() {
           <ProjectsSection />
         </BlurFade>
       </section>
-      <section id="hackathons">
-        <BlurFade delay={BLUR_FADE_DELAY * 13}>
-          <HackathonsSection />
-        </BlurFade>
-      </section>
+      {DATA.hackathons.length > 0 && (
+        <section id="hackathons">
+          <BlurFade delay={BLUR_FADE_DELAY * 13}>
+            <HackathonsSection />
+          </BlurFade>
+        </section>
+      )}
       <section id="contact">
         <BlurFade delay={BLUR_FADE_DELAY * 16}>
           <ContactSection />

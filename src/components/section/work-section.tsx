@@ -30,10 +30,24 @@ function LogoImage({ src, alt }: { src: string; alt: string }) {
   );
 }
 
+// work: []の場合、as const推論で要素型がnever化するため明示的にキャストする
+// (詳細はhackathons-section.tsxの同様のコメント参照)
+type WorkItem = {
+  company: string;
+  href: string;
+  badges: readonly string[];
+  location: string;
+  title: string;
+  logoUrl: string;
+  start: string;
+  end?: string;
+  description: string;
+};
+
 export default function WorkSection() {
   return (
     <Accordion type="single" collapsible className="w-full grid gap-6">
-      {DATA.work.map((work) => (
+      {(DATA.work as readonly WorkItem[]).map((work) => (
         <AccordionItem
           key={work.company}
           value={work.company}

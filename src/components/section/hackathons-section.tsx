@@ -4,6 +4,19 @@ import Link from "next/link";
 import { DATA } from "@/data/resume";
 import { Timeline, TimelineItem, TimelineConnectItem } from "@/components/timeline";
 
+// hackathons: []の場合、as const推論で要素型がnever化するため明示的にキャストする
+type HackathonItem = {
+  title: string;
+  dates: string;
+  location: string;
+  description: string;
+  image?: string;
+  mlh?: string;
+  win?: string;
+  icon?: string;
+  links: readonly { title: string; icon: React.ReactNode; href: string }[];
+};
+
 export default function HackathonsSection() {
   return (
     <section id="hackathons" className="overflow-hidden">
@@ -26,7 +39,7 @@ export default function HackathonsSection() {
           </div>
         </div>
         <Timeline>
-          {DATA.hackathons.map((hackathon) => (
+          {(DATA.hackathons as readonly HackathonItem[]).map((hackathon) => (
             <TimelineItem key={hackathon.title + hackathon.dates} className="w-full flex items-start justify-between gap-10">
               <TimelineConnectItem className="flex items-start justify-center">
                 {hackathon.image ? (

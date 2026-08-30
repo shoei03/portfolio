@@ -83,7 +83,9 @@ export default function RootLayout({
                 }}
               />
             </div>
-            <div className="relative z-10 max-w-2xl mx-auto py-12 pb-24 sm:py-24 px-6">
+            {/* 幅の指定は各ページ側(page.tsx等)に委ねる。記事系ページはPC画面で
+                横幅をもっと使えるよう、ここではmax-widthを固定しない */}
+            <div className="relative z-10 mx-auto py-12 pb-24 sm:py-24 px-6">
               {children}
             </div>
             <Navbar />
