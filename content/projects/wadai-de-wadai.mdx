@@ -1,0 +1,178 @@
+---
+title: "和大DE話題"
+summary: "新歓まつりの形骸化という課題に対し、QRコードでスタンプを集められるデジタルスタンプラリーアプリを企画・開発した学生プロジェクト。"
+---
+
+# 和大DE話題
+
+<MediaContainer
+  src="/wadai-de-wadai_cover.png"
+  alt="「和大DE話題」アプリの画面(新歓日程・QRスキャン・ランキング・マイページ)"
+  caption="実際のアプリ画面。新歓日程の確認からQRスキャンでのスタンプ収集、ランキング、マイページまでを1つのアプリで完結できる"
+  className="h-[220px] sm:h-[320px] md:h-[420px]"
+/>
+
+## 背景
+
+2024年の11月頃のお昼休憩で自治会の友達が、「春の新歓まつりが形骸化しているのでどうにかしたい」と言っていた。そこで、自身が学部1年生の頃、新歓に参加しても上手く話せず友達が作れず、新歓に参加することが億劫になっていたことを思い出した。
+
+したがって、自治会の友達の課題も解決しつつ、かつて私が学部1年生の頃に抱いていた問題を解決したいと考え、2人で協力して解決策を考えることにした。
+
+## 課題
+
+春の新歓まつりが形骸化している理由を深掘りするため、新入生 約1,000人を「新歓に参加するか」「まつりの存在を知っているか」という2つの軸で分解した。
+
+<div className="not-prose breakout my-6 rounded-xl border border-border bg-muted/20 p-5 sm:p-6">
+  <div className="mb-5 flex justify-center">
+    <span className="rounded-lg bg-foreground px-4 py-1.5 text-sm font-semibold text-background">
+      新入生 約1,000人
+    </span>
+  </div>
+  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <div className="flex flex-col gap-2 rounded-lg border border-border bg-card p-4">
+      <p className="text-sm font-semibold">新歓に参加する</p>
+      <div className="rounded-md border border-primary/40 bg-primary/5 px-3 py-2 text-xs leading-relaxed">
+        <span className="font-medium">春の新歓まつりを知っている</span>
+        <br />
+        → スタンプを集められる
+      </div>
+      <div className="rounded-md bg-muted/50 px-3 py-2 text-xs leading-relaxed text-muted-foreground">
+        春の新歓まつりを知らない
+        <br />
+        → 参加の機会を逃す
+      </div>
+    </div>
+    <div className="flex flex-col gap-2 rounded-lg border border-border bg-card p-4">
+      <p className="text-sm font-semibold">新歓に参加しない</p>
+      <div className="rounded-md bg-muted/50 px-3 py-2 text-xs leading-relaxed text-muted-foreground">
+        過去に参加したが、コミュニケーションの問題で億劫に
+      </div>
+      <div className="rounded-md bg-muted/50 px-3 py-2 text-xs leading-relaxed text-muted-foreground">
+        そもそも参加しないと決めている
+      </div>
+    </div>
+  </div>
+  <p className="mt-4 text-center text-xs text-muted-foreground">
+    実際にスタンプを集められるのは「参加していて、かつ、まつりの存在を知っている」一部の層だけだった
+  </p>
+</div>
+
+紙のスタンプカードだと持ち歩いていない場合に集められない、という運用面の課題もあった。
+
+## 目的
+
+そこで、新歓に参加する層(Participate)と参加したことはあるが、コミュニケーションに問題を抱える人をターゲットとして、春の新歓まつりを活性化させることを目的とした。
+
+## 達成目標
+
+目的を達成するため、以下の目標を掲げ、プロジェクトをスタートさせた。
+
+<FeatureGrid cols={3}>
+  <Feature title="周知" icon="megaphone">新歓まつりの存在を新入生に周知させる</Feature>
+  <Feature title="収集" icon="stamp">スタンプを集める人を増やす</Feature>
+  <Feature title="交流" icon="users">新歓でのコミュニケーションのきっかけをつくる</Feature>
+</FeatureGrid>
+
+## 要件定義
+
+<FeatureGrid cols={2}>
+  <Feature title="QRコードでスタンプ収集" icon="qrcode">
+    新入生が団体へ参加したことを証明するため、各団体の代表者だけにQRコードを配布。本アプリ内から読み込むだけでスタンプが貯まるので、紙のスタンプカードを持ち歩く必要がない。
+  </Feature>
+  <Feature title="ランキング表示" icon="trophy">
+    スタンプ獲得数のランキングを表示し、新歓内でのコミュニケーションを加速する会話スターターにする。
+  </Feature>
+</FeatureGrid>
+
+## 開発スタック
+
+### メンバー
+
+<FeatureGrid cols={4}>
+  <Feature title="PM" icon="handshake">自治会とやりとりを行い、アプリを学内公式アプリとして運用する</Feature>
+  <Feature title="PdM" icon="clipboard">アプリの設計やコードレビューを行う</Feature>
+  <Feature title="エンジニア" icon="code">実際にコーディングを行う</Feature>
+  <Feature title="デザイナー" icon="palette">アプリのUI/UXをデザインする</Feature>
+</FeatureGrid>
+
+### 技術スタック
+
+PdMがVue.jsでWebアプリを開発したことがあったため、**フロントエンドはVue.js**を用いた。1ヶ月後の自治会のミーティングで実際のデモンストレーションを見せながらアプリの導入可否について判断してもらうという短い開発期間のため、**バックエンドはBaaSのFirebase**を用いた。
+
+## 開発プロセス
+
+PdMが1週間ほどでFirebaseとのデータのやり取りやデータベースのスキーマを決定し、エンジニアである私がVue.jsでデザイナーが作ったUI/UXデザインを基にフロントエンドを2週間程度で構築した。
+
+その後、自治会ミーティングでPMがアプリのデモンストレーションを見せ、導入の可否を問うた。**以下の問題点があるため、可否は保留**となった。
+
+- スタンプを集めることでどのような景品がもらえるのか？その景品はどうやって用意するのか？
+- 公式アプリとして運用する上でセキュリティ面の安全性はどうなのか？
+- 本アプリの導入による効果が予測できないため、もっと魅力的な機能を追加してほしい
+
+**上記の問題を解決する**ため、チームで以下の議論をした。
+
+- スタンプを集めることによるメリットとして、大学のマスコットキャラであるわだにゃんのオリジナルスタンプを作成し、さらに、景品は大学生協と協力し、金券を配ることで新入生の動機付けとする。
+- アプリ内では大学のメールアドレスは登録できないようにし、ユーザ名も本名を入力しないようなUXへ変更することで万が一情報が漏洩しても被害を最小限に抑える。
+- 新歓の日程が各団体のSNSに投稿されており、新入生は一括で情報を管理できないという問題を新たに提起し、新歓日程の一括管理機能を追加する。
+
+### セキュリティ対策
+
+学内公式アプリとして新入生の個人情報を預かる以上、情報漏洩時の被害を最小限に抑えることを最優先で設計した。
+
+- 大学の公式メールアドレスでの登録を禁止し、フリーメールなど任意のメールアドレスのみ登録可能にした
+- ユーザー名に本名を使わせない設計にすることで、万が一情報が漏洩しても個人が特定されにくいようにした
+
+{/* TODO: 他にも実施した対策(Firebase Security Rulesでのアクセス制御、入力値のバリデーションなど)があれば追記してください */}
+
+### 運用後の問題
+
+DBの負荷テストをしていなかったため、スタンプのランキング画面で全ユーザのランキングを表示しようとしてフェッチに時間がかかっていた。
+
+当初は、サーバ側でランキングを計算しておき、順位も保持させようとした。しかし、Firebaseでは、定期的にサーバでランキング計算することは有料の機能だったため、コストの観点から断念した。つまり、ランキングの計算し順位づけするのはフロントエンドで行う必要があった。
+
+そこで、ランキング情報はキャッシュしておき、更新ボタンをタップしたときだけ再フェッチし、フロントでランキングを計算し直すようにした。こうすることでランキングの表示速度は改善したが、古いデータが表示されてしまいUXがよくないと考えた。
+
+最終的に更新ボタンがタップされ、DBが最新になったタイミングでトップ100のテーブルを作成しておき、そこからフェッチすることで表示速度とUXを改善した。
+
+## 運用実績
+
+導入前後で、以下のような変化があった。
+
+<StatGrid>
+  <Stat value="約650人" label="アプリ登録者数(新入生1,000人中)" />
+  <Stat value="約50人" label="スタンプ5個以上達成(景品獲得条件)" />
+  <Stat value="約20人" label="景品(650円分金券)受け取り(導入前は2人)" />
+</StatGrid>
+
+### 新歓まつりの存在を周知させる
+
+新入生のガイダンスで、私が本アプリのプレゼンを行ったり、自治会にSNSで周知してもらった。その結果、新入生約1,000人のうち650人近くがアプリにアカウントを登録した。
+
+<MediaContainer
+  src="/guidance.webp"
+  alt="新入生ガイダンスで「和大DE話題」を紹介している様子"
+  caption="新入生ガイダンスでのアプリ紹介の様子"
+  className="h-[220px] sm:h-[300px] md:h-[380px]"
+/>
+
+### スタンプを集める人を増やす
+
+アプリ導入後は約50人がスタンプを5個以上集め（景品獲得条件）、うち約20人が実際に景品を取得（650円の金券）した。アプリ導入前は景品獲得者が2人だった。
+
+<MediaContainer
+  src="/reward.jpg"
+  alt="スタンプ5個達成者に贈られた650円分の金券とアプリのスタンプ画面"
+  caption="達成者に配布した650円分の金券(生協と協力)"
+/>
+
+### 新歓でのコミュニケーションのきっかけとなる
+
+自身のサークルでも「スタンプを集めてるんです！」という新入生がいた。
+
+## メディア掲載
+
+学長にも取り上げていただき、複数の媒体で紹介された。
+
+- [和歌山大学 公式サイト「学生発案の新歓アプリ」紹介記事](https://www.wakayama-u.ac.jp/news/2025052300074/)
+- [Instagram投稿](https://www.instagram.com/p/DLzPewkS3t6/)
+- [Facebook投稿](https://www.facebook.com/wakayamauniv/posts/%E5%AD%A6%E7%94%9F%E7%99%BA%E6%A1%88%E6%96%B0%E6%AD%93%E3%82%A2%E3%83%97%E3%83%AA%E5%92%8C%E5%A4%A7%E3%81%A7%E8%A9%B1%E9%A1%8C%E4%BB%8A%E5%B9%B43%E6%9C%88%E3%81%8B%E3%82%895%E6%9C%88%E3%81%AB%E3%81%8B%E3%81%91%E3%81%A6%E9%81%8B%E7%94%A8%E3%81%95%E3%82%8C%E3%81%9F%E6%96%B0%E5%85%A5%E7%94%9F%E6%AD%93%E8%BF%8E%E3%82%A2%E3%83%97%E3%83%AA%E5%92%8C%E5%A4%A7%E3%81%A7%E8%A9%B1%E9%A1%8C%E3%81%93%E3%81%AE%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AF%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E5%B7%A5%E5%AD%A6%E9%83%A8%E3%81%AE%E5%AD%A6%E7%94%9F%E3%82%92%E4%B8%AD%E5%BF%83%E3%81%A8%E3%81%97%E3%81%9F%E6%9C%89%E5%BF%97%E3%83%A1%E3%83%B3%E3%83%90%E3%83%BC%E3%81%8C%E4%BC%81%E7%94%BB%E3%81%8B%E3%82%89%E5%90%84%E5%9B%A3%E4%BD%93/1346565517474362/)
