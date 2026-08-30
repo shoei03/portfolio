@@ -18,10 +18,21 @@ import { Expo } from "@/components/ui/svgs/expo";
 import { Figma } from "@/components/ui/svgs/figma";
 import { Gitea } from "@/components/ui/svgs/gitea";
 
+// サイトの本番URL。優先順位:
+// 1. NEXT_PUBLIC_SITE_URL (Vercelの環境変数で明示的に設定した場合。独自ドメインを使うならこれが確実)
+// 2. VERCEL_PROJECT_PRODUCTION_URL (Vercelが自動で持つ本番URL。プロジェクト設定で
+//    「System Environment Variables」を有効にした場合のみ自動で入る)
+// 3. localhost (ローカル開発用のフォールバック)
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");
+
 export const DATA = {
   name: "Shoei Yoshida",
   initials: "S.Y.",
-  url: "https://dillion.io",
+  url: siteUrl,
   location: "Wakayama",
   locationLink: "https://maps.app.goo.gl/AJuHG5dvQJacgvDF9",
   description:
