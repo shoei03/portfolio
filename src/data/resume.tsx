@@ -117,9 +117,9 @@ export const DATA = {
   projects: [
     {
       title: "和大DE話題",
-      // slugがcontent/projects/<slug>.mdxと一致すると、カードのタップ先が
-      // 外部サイトではなくこの記事(/projects/<slug>)になります。
-      slug: "wadai-de-wadai",
+      // 開発背景を綴った記事ページ。指定すると、カードのタップ先が外部サイトでは
+      // なくこの記事になります(実体は src/app/projects/wadai-de-wadai/page.tsx)。
+      detailHref: "/projects/wadai-de-wadai",
       // hrefは「外部サイト」用(右上のアイコン等で使用)。実サイトのURLを指定する
       href: "https://wadai-de-wadai.web.app",
       dates: "November 2024 - March 2025",

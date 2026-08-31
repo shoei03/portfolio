@@ -30,30 +30,10 @@ const posts = defineCollection({
     },
 });
 
-// プロジェクトの開発背景などを綴る記事。`content/projects/<slug>.mdx` に置く。
-// resume.tsx の projects[].slug と同じファイル名にすると、プロジェクトカードから
-// この記事へ遷移するようになる（未対応の場合は外部リンクへフォールバック）。
-const projectPosts = defineCollection({
-    name: "projectPosts",
-    directory: "content/projects",
-    include: "**/*.mdx",
-    schema: z.object({
-        title: z.string(),
-        summary: z.string(),
-        content: z.string(),
-    }),
-    transform: async (document, context) => {
-        const mdx = await compileMDX(context, document, {
-            remarkPlugins: [remarkGfm, remarkCodeMeta],
-        });
-        return {
-        ...document,
-            mdx,
-        };
-    },
-});
+// プロジェクトの開発背景などを綴る記事はMDXをやめ、src/app/projects/<slug>/ の
+// 素のNextページとして書いている（resume.tsx の projects[].detailHref から遷移する）。
 
 export default defineConfig({
-    collections: [posts, projectPosts],
+    collections: [posts],
 });
 

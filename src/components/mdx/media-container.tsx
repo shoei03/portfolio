@@ -18,7 +18,7 @@ export function MediaContainer({
   className = "",
 }: MediaContainerProps) {
   return (
-    <figure className="not-prose breakout">
+    <figure className="not-prose">
       <div
         className={cn(
           "ring-4 ring-muted w-full h-[300px] rounded-lg overflow-hidden flex items-center justify-center",
