@@ -11,7 +11,7 @@ import type { ReactNode } from "react";
  */
 export function StatGrid({ children }: { children: ReactNode }) {
   return (
-    <div className="not-prose breakout grid grid-cols-1 gap-3 sm:grid-cols-3 my-6">
+    <div className="not-prose grid grid-cols-1 gap-3 sm:grid-cols-3 my-6">
       {children}
     </div>
   );

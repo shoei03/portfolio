@@ -1,14 +1,8 @@
 import BlurFade from "@/components/magicui/blur-fade";
 import { ProjectCard } from "@/components/project-card";
 import { DATA } from "@/data/resume";
-import { allProjectPosts } from "content-collections";
 
 const BLUR_FADE_DELAY = 0.04;
-
-// slugに対応する記事(content/projects/<slug>.mdx)が存在するプロジェクトのslug一覧
-const slugsWithArticle = new Set(
-    allProjectPosts.map((post) => post._meta.path.replace(/\.mdx$/, ""))
-);
 
 export default function ProjectsSection() {
     return (
@@ -39,11 +33,9 @@ export default function ProjectsSection() {
                 </div>
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto auto-rows-fr">
                     {DATA.projects.map((project, id) => {
-                        const slug = "slug" in project ? project.slug : undefined;
+                        // 記事ページを持つプロジェクトはそちらへ、無ければ外部サイトへ
                         const detailHref =
-                            slug && slugsWithArticle.has(slug)
-                                ? `/projects/${slug}`
-                                : undefined;
+                            "detailHref" in project ? project.detailHref : undefined;
 
                         return (
                             <BlurFade

@@ -47,7 +47,7 @@ export function FeatureGrid({
   return (
     <div
       className={cn(
-        "not-prose breakout my-6 grid grid-cols-1 gap-3",
+        "not-prose my-6 grid grid-cols-1 gap-3",
         cols === 2 && "sm:grid-cols-2",
         cols === 3 && "sm:grid-cols-3",
         cols === 4 && "sm:grid-cols-2 lg:grid-cols-4"
