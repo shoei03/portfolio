@@ -9,7 +9,7 @@ import { Nodejs } from "@/components/ui/svgs/nodejs";
 import { Python } from "@/components/ui/svgs/python";
 import { Docker } from "@/components/ui/svgs/docker";
 import { Java } from "@/components/ui/svgs/java";
-import { Csharp } from "@/components/ui/svgs/csharp";
+import { Cpp } from "@/components/ui/svgs/cpp";
 import { Firebase } from "@/components/ui/svgs/firebase";
 import { Supabase } from "@/components/ui/svgs/supabase";
 import { Vercel } from "@/components/ui/svgs/vercel";
@@ -45,7 +45,7 @@ export const DATA = {
     { name: "Typescript", icon: Typescript },
     { name: "Python", icon: Python },
     { name: "Java", icon: Java },
-    { name: "C++", icon: Csharp },
+    { name: "C++", icon: Cpp },
     { name: "React", icon: ReactLight },
     { name: "Next.js", icon: NextjsIconDark },
     { name: "Vue.js", icon: Vue },
@@ -121,7 +121,7 @@ export const DATA = {
       // なくこの記事になります(実体は src/app/projects/wadai-de-wadai/page.tsx)。
       detailHref: "/projects/wadai-de-wadai",
       // hrefは「外部サイト」用(右上のアイコン等で使用)。実サイトのURLを指定する
-      href: "https://wadai-de-wadai.web.app",
+      href: "https://wadai-de-wadai-v1.web.app",
       dates: "November 2024 - March 2025",
       active: true,
       description:
@@ -135,7 +135,7 @@ export const DATA = {
       links: [
         {
           type: "Website",
-          href: "https://wadai-de-wadai.web.app",
+          href: "https://wadai-de-wadai-v1.web.app",
           icon: <Icons.globe className="size-3" />,
         },
       ],
