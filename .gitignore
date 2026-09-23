@@ -39,12 +39,6 @@ yarn-error.log*
 next-env.d.ts
 .content-collections
 
-# claude code
-# public リポジトリなので .claude/ ごと追跡しない。plans/ には作業中の判断や
-# 素材の取捨選択がそのまま残り、git add -A 一回で公開されてしまう。
-# ここに置いたものを追跡したくなったら、そのパスだけ明示的に除外を打ち消すこと。
-.claude/
-
 # 大きなメディア
 # LFS を使っていない public リポジトリなので、一度入れると履歴から消せない。
 # 15MB・src/ からの参照ゼロのため追跡しない。ページで実際に使うときに、
